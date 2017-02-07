@@ -33,7 +33,7 @@ def runPreprocess(dataAll, labelsAll, segmentsAll, SETTINGS):
         
     """
     # (0) Smoothing
-    dataAll = smoothing(dataAll, 'sliding', winsize = 5)
+    dataAll = smoothing(dataAll, 'gaussian', winsize = 10)
 
     # (1) Preprocessing
     # Split data set into repetitions
