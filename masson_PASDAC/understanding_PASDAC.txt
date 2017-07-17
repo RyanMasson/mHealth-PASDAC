@@ -1,0 +1,65 @@
+Ryan Masson
+2/7/17
+PASDAC Assignment: Understanding PASDAC
+
+Note: My smoothing seems to work pretty well but I am losing precision; tried to cast things to floats
+but I don't know what's happening there.
+
+prepareFoldData
+1. This is a top level function that prepares the folds of data for training and classification.
+2. Input variables: Takes just one variable, SETTINGS, which was defined in my_settings.py and determines the setting of the experiment.
+3. Output variables: features, fType, fDescr, segments, segmentations, labelsSegmentations, and SETTINGS. These help the system then go on the run the experimental evaluation.
+
+runPreprocess
+1. This function preprocesses the data by calling functions that smooth it, split it, and segment/feature extract from repetitions.
+2. Input variables: dataAll, labelsAll, segmentsAll, SETTINGS
+3. Output variables: features, fType, fDescr, segments, segmentations, labelsSegmentations
+
+splitIntoRepetitions
+1. Splits the data into a list of single repetitions.
+2. Input variables: dataAll, labelsAll, segmentsAll
+3. Output varialbes: features
+
+segment
+1. Segments the data into segmentations.
+2. Input variables: the data, a method (either SlidingWindow or Rest), and SETTINGS
+3. Output variables: segments
+
+segmentSlidingWindow
+1. Segments according to a sliding window technique.
+2. Input variables: data, window size, and step size.
+3. Output variables: segments
+
+assignLabels
+1. Assigns labels to segmentation.
+2. Input variables: segments, segmentation.
+3. Output variables: labels
+
+featureExtraction
+1. Extracts features from the data.
+2. Input variables: data, segmentations, featureType, verbosity level.
+3. Output variables: featuresDf, fType, fDescr.
+
+runEvaluation
+1. Top level function that runs the actual evaluation of the experiment. Creates training and test data sets, standardizes those sets, trains the classifier, evaluates, and plots.
+2. Input variables: features, fType, fDescr, segments, segmentation, labelsSegmentations
+3. Output variables: confusion matrix, and score evaluation.
+
+decision
+1. Decides the final class for each time series data point.
+2. Input variable: scoresTimeseries
+3. Output variable: predictionDf
+
+coreEvaluate
+1. Calculates metrics for class c and non-class c.
+2. Input variables: labels, pred, c
+3. Output variables: precisions, recalls, fallouts, ccuracys
+
+plotROC
+Plots a receiver operating characteristic curve for this evaluation of this model.
+
+plotConfusionMatrix
+Plots a confusion matrix for the model.
+
+saveResult
+Saves the result to two csv files.
